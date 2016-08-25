@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">CheckPrime2</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="True">True</string>
+    <string name="False">False</string>
+    <string name="Next">Next</string>
+    <string name="Hint">Hint</string>
+    <string name="Cheat">Cheat</string>
+    <string name="showHint">Show Hint</string>
+    <string name="showCheat">Cheat</string>
+    <string name="Back">Back</string>
+    <string name="title_activity_hint">HintActivity</string>
+    <string name="title_activity_cheat">CheatActivity</string>
+
+</resources>
