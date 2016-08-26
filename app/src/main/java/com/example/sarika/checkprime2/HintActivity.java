@@ -21,16 +21,17 @@ public class HintActivity extends AppCompatActivity {
     private String showHint = " ";
 
     @Override
-    protected void onCreate(Bundle savedInstanceStateh) {
-        super.onCreate(savedInstanceStateh);
+    protected void onCreate(Bundle savedInstanceStateH) {
+        super.onCreate(savedInstanceStateH);
         setContentView(R.layout.activity_hint);
 
         button_hint_show = (Button) findViewById(R.id.button_showhint);
         button_back = (Button) findViewById(R.id.button_back);
         text_showHint = (TextView) findViewById(R.id.text_hint);
 
-        if (savedInstanceStateh != null) {
-            clicked_hint = savedInstanceStateh.getInt(TAG4);
+        /* Get the value from the saved instance if instance saved */
+        if (savedInstanceStateH != null) {
+            clicked_hint = savedInstanceStateH.getInt(TAG4);
             if (clicked_hint == 1) {
                 showHint = "Check whether the number is divisible by numbers less than its square root other than 1. If so then it is not prime otherwise it is prime";
             } else {
@@ -39,6 +40,7 @@ public class HintActivity extends AppCompatActivity {
             text_showHint.setText(showHint);
         }
 
+        //Shows the hint when 'Show Hint' button is pressed
         button_hint_show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,17 +50,21 @@ public class HintActivity extends AppCompatActivity {
             }
         });
 
+        /*
+         * Finishes the activity when 'Back' button is pressed
+         * and returns a value indicating whether user has taken the hint or not to the parent activity(MainActivity)
+         * */
         button_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(HintActivity.this, MainActivity.class);
+                Intent gotoMain = new Intent(HintActivity.this, MainActivity.class);
                 if (clicked_hint == 1) {
-                    i.putExtra("hint_seen", 1);
+                    gotoMain.putExtra("hint_seen", 1);
                 } else {
-                    i.putExtra("hint_seen", 0);
+                    gotoMain.putExtra("hint_seen", 0);
                 }
-                setResult(RESULT_OK, i);
+                setResult(RESULT_OK, gotoMain);
                 finish();
             }
         });
@@ -74,9 +80,9 @@ public class HintActivity extends AppCompatActivity {
 
     /* Saving the instance */
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceStateh) {
-        savedInstanceStateh.putInt(TAG4, clicked_hint);
-        super.onSaveInstanceState(savedInstanceStateh);
+    public void onSaveInstanceState(Bundle savedInstanceStateH) {
+        savedInstanceStateH.putInt(TAG4, clicked_hint);
+        super.onSaveInstanceState(savedInstanceStateH);
     }
 
     @Override

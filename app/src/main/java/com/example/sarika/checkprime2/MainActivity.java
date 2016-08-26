@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         button_hint = (Button) findViewById(R.id.button_hint);
         button_cheat = (Button) findViewById(R.id.button_cheat);
 
+        //Sends the number to CheckTrue function if True button is clicked
         button_true.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Sends the number to CheckFalse function if False button is clicked
         button_false.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,24 +79,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Moves to HintActivity activity using intent when Hint button is pressed
         button_hint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int result = 0;
-                Intent i = new Intent(MainActivity.this, HintActivity.class);
-                startActivityForResult(i, result);
+                Intent gotoHint = new Intent(MainActivity.this, HintActivity.class);
+                //startActivityForResult is used as we expect some value to be returned from HintActivity when it finishes
+                startActivityForResult(gotoHint, result);
             }
         });
+
+        //Moves to CheatActivity activity using intent when Cheat button is pressed
         button_cheat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String ques = (String) question.getText();
                 String quest[] = ques.split(" ");
                 int result = 1;
-                Intent i = new Intent(MainActivity.this, CheatActivity.class);
+                Intent gotoCheat = new Intent(MainActivity.this, CheatActivity.class);
                 String value = quest[0];
-                i.putExtra("value", value);
-                startActivityForResult(i, result);
+                //putExtra is used to send data from MainActivity to CheatActivity
+                gotoCheat.putExtra("value", value);
+                //startActivityForResult is used as we expect some value to be returned from CheatActivity when it finishes
+                startActivityForResult(gotoCheat, result);
             }
         });
 
@@ -132,6 +140,10 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
     }
 
+    /*
+    * This checks from which child Activity the result has been returned and generates corresponding toast
+    * whenever the child activity finishes it returns to this method
+    * */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0) {
